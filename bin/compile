@@ -2,16 +2,22 @@
 
 set -e # bail if any command fails
 
+echo "-----> compiling heroku-buildpack-maxmind"
+
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
 MAXMIND_EDITIONS=`cat $ENV_DIR/MAXMIND_EDITIONS`
 
+echo "-----> editions: $MAXMIND_EDITIONS"
+
 mkdir -p $CACHE_DIR
 
 download(){
 	EDITION=$1
+
+  echo "-----> download: $EDITION"
 
 	TAR="$CACHE_DIR/$EDITION.mmdb.gz"
 	DB="$CACHE_DIR/$EDITION.mmdb"
